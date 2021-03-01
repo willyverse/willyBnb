@@ -138,4 +138,4 @@ AUTH_USER_MODEL = "users.User"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
-MEDIA_URL = "/media/"  # the fron slash("/") means this path is absolute path
+MEDIA_URL = "/media/"  # the front slash("/") means this path is absolute path

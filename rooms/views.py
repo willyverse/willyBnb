@@ -1,5 +1,7 @@
-from django.utils import timezone
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, UpdateView
+
+# from django.http import Http404
+# from django.shortcuts import render
 from . import models
 
 # Create your views here.
@@ -16,8 +18,49 @@ class HomeView(ListView):
     page_kwargs = "potato"
     context_object_name = "rooms"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        now = timezone.now()
-        context["now"] = now
-        return context
+
+class RoomDetail(DetailView):
+
+    """ RoomDetail Definition """
+
+    model = models.Room
+    pk_url_kwarg = "pk"
+
+
+# def room_detail(request, pk):
+
+#     try:
+#         room = models.Room.objects.get(pk=pk)
+#         return render(
+#             request,
+#             "rooms/detail.html",
+#             context={
+#                 "room": room,
+#             },
+#         )
+#     except models.Room.DoesNotExist:
+#         raise Http404()
+
+
+class EditRoomView(UpdateView):
+    model = models.Room
+    template_name = "rooms/room_edit.html"
+    fields = (
+        "name",
+        "description",
+        "country",
+        "city",
+        "price",
+        "address",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "room_type",
+        "amenities",
+        "facilities",
+        "house_rules",
+    )
