@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.views.generic import ListView, DetailView, UpdateView
 
 # from django.http import Http404
@@ -64,3 +65,9 @@ class EditRoomView(UpdateView):
         "facilities",
         "house_rules",
     )
+
+    def get_object(self, queryset=None):
+        room = super().get_object(queryset=queryset)
+        if room.host.pk != self.request.user.pk:
+            raise Http404()
+        return room
