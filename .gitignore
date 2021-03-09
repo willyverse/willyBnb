@@ -142,3 +142,4 @@ secretkey.py
 
 # Files privately uploaded
 uploads/
+node_modules

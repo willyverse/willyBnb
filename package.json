@@ -1,0 +1,22 @@
+{
+  "name": "willybnb",
+  "version": "1.0.0",
+  "description": "Cloning Airbnb with Python, Django, Tailwind and more ...",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willykr/willyBnb.git"
+  },
+  "scripts": {
+    "css":"gulp"
+  },
+  "homepage": "https://github.com/willykr/willyBnb#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^5.0.0",
+    "tailwindcss": "^2.0.3"
+  }
+}
