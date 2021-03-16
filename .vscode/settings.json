@@ -11,5 +11,8 @@
     "**/templates/**/*.html": "django-html",
     "**/templates/**/*": "django-txt",
     "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+  },
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
   }
 }
