@@ -5,6 +5,7 @@ from django.views.generic import FormView, DetailView, UpdateView
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.core.files.base import ContentFile
 from . import forms, models
 
@@ -50,11 +51,6 @@ class SignUpView(FormView):
 
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
-    initial = {
-        "first_name": "Willy",
-        "last_name": "Kim",
-        "email": "cy@k.com",
-    }
     success_url = reverse_lazy("core:home")
 
     def form_valid(self, form):
@@ -187,6 +183,7 @@ def kakao_callback(request):
     try:
         client_id = os.environ.get("KAKAO_ID")
         code = request.GET.get("code")
+        raise KakaoException()
         redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
         token_request = requests.get(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
@@ -230,4 +227,5 @@ def kakao_callback(request):
         login(request, user)
         return redirect(reverse("core:home"))
     except KakaoException:
+        messages.error(request, "Something went wrong")
         return redirect(reverse("users:login"))
