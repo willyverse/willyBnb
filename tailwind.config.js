@@ -14,6 +14,8 @@ module.exports = {
       red: colors.rose,
       yellow: colors.amber,
       teal: colors.teal,
+      green: colors.green,
+      blue: colors.blue,
     },
     extend: {
       spacing: {
@@ -23,6 +25,10 @@ module.exports = {
       },
       borderRadius: {
         xl: "1.5rem"
+      },
+      minHeight: {
+        "50vh": "50vh",
+        "75vh": "75vh",
       }
     },
   },
