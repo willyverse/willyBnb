@@ -5,6 +5,7 @@ from django.views.generic import FormView, DetailView, UpdateView
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -272,3 +273,14 @@ def kakao_callback(request):
     except KakaoException as e:
         messages.error(request, e)
         return redirect(reverse("users:login"))
+
+
+@login_required
+def switch_hosting(request):
+    try:
+        del request.session["is_hosting"]
+        messages.info(request, "Stop-hosting mode")
+    except KeyError:
+        request.session["is_hosting"] = True
+        messages.info(request, "Start-hosting mode")
+    return redirect(reverse("core:home"))
