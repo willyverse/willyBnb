@@ -2,7 +2,6 @@ import datetime
 from django.db import models
 from django.utils import timezone  # Go to settings.py TIME_ZONE
 from core import models as core_models
-from . import managers
 
 
 class BookedDay(core_models.TimeStampedModel):
@@ -42,7 +41,6 @@ class Reservation(core_models.TimeStampedModel):
     room = models.ForeignKey(
         "rooms.Room", related_name="reservations", on_delete=models.CASCADE
     )
-    objects = managers.CustomReservationManager()
 
     def __str__(self):
         return self.room.name + " - " + str(self.check_in) + "~" + str(self.check_out)

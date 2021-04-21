@@ -72,13 +72,24 @@
                 <div class="mt-10">
                     {% for review in room.reviews.all %}
                         <div class="border-section">
-                            <div class="mb-3 flex">
-                                <div>
-                                    {% include "mixins/user_avatar.html" with user=review.user h_and_w="h-10 w-10" text="text-xl" %}
+                            <div class="mb-3 flex justify-between">
+                                <div class="flex">
+                                    <div>
+                                        {% include "mixins/user_avatar.html" with user=review.user h_and_w="h-10 w-10" text="text-xl" %}
+                                    </div>
+                                    <div class="flex flex-col ml-5">
+                                        <span class="font-medium">{{review.user.first_name}}</span>
+                                        <span class="text-sm text-gray-500">{{review.created|date:"F Y"}}</span>
+                                    </div>
                                 </div>
-                                <div class="flex flex-col ml-5">
-                                    <span class="font-medium">{{review.user.first_name}}</span>
-                                    <span class="text-sm text-gray-500">{{review.created|date:"F Y"}}</span>
+                                <div class="flex">
+                                    {% for reservation in room.reservations.all %}
+                                        {% if reservation.guest.pk == review.user.pk %}
+                                            <a href="#" class="btn-link bg-teal-500 w-16 mr-2">edit</a>
+                                            <a href="#" class="btn-link w-16">delete</a>
+                                        {% endif %}
+                                    {% endfor %}
+
                                 </div>
                             </div>
                             <p>{{review.review}}</p>
